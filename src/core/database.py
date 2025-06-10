@@ -10,9 +10,10 @@ engine = create_async_engine(
     echo=True,
 )
 
-session = async_sessionmaker(engine, expire_on_commit=False)
+Session = async_sessionmaker(engine, expire_on_commit=False)
 
 int_pk = Annotated[int, mapped_column(primary_key=True)]
+
 
 class Base(AsyncAttrs, DeclarativeBase):
     __abstract__ = True
@@ -20,4 +21,3 @@ class Base(AsyncAttrs, DeclarativeBase):
     @declared_attr.directive
     def __tablename__(cls) -> str:
         return f"{cls.__name__.lower()}s"
-
