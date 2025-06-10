@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 from src.core.log import logging_init_config, LOGGING_CONFIG
-from src.api.wallets import router as wallets_router
+from src.api.handlers.wallets import router as wallets_router
 
 
 def create_app() -> FastAPI:

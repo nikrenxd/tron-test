@@ -7,7 +7,7 @@ from src.core.settings import base_config
 
 engine = create_async_engine(
     url=base_config.DB_URL,
-    echo=True,
+    echo=False,
 )
 
 Session = async_sessionmaker(engine, expire_on_commit=False)
