@@ -14,3 +14,13 @@ async def create_wallet_record(
     wallet_info = await wallets_services.get_account_info(data.wallet_address)
     await wallets_services.save_account_info(**wallet_info)
     return wallet_info
+
+
+@router.get("/", response_model=list[WalletsInfoSchema])
+async def get_wallets(
+    limit: int,
+    offset: int,
+    wallets_services: WalletsServicesDependency,
+):
+    wallets = await wallets_services.get_last_accounts_info(limit, offset)
+    return wallets
