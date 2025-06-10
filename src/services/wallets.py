@@ -14,10 +14,10 @@ class WalletsServices:
             account_balance = await client.get_account_balance(wallet_address)
             resources = await client.get_account_resource(wallet_address)
 
-            bandwidth_limit = resources.get("freeNetLimit")
+            bandwidth_limit = resources.get("freeNetLimit", 0)
             bandwidth_left = bandwidth_limit - resources.get("freeNetUsed", 0)
 
-            energy_limit = resources.get("EnergyLimit")
+            energy_limit = resources.get("EnergyLimit", 0)
             energy_left = energy_limit - resources.get("EnergyUsed", 0)
 
             account_data = {
@@ -31,8 +31,8 @@ class WalletsServices:
 
             return account_data
 
-    async def get_last_accounts_info(self):
-        pass
+    async def get_last_accounts_info(self, limit: int, offset: int):
+        return await self.repository.get_wallets_info(limit, offset)
 
-    async def save_account_info(self):
-        pass
+    async def save_account_info(self, **data) -> None:
+        await self.repository.create_wallet_info(**data)
