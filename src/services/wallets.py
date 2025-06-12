@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 from tronpy import AsyncTron
 
+from src.models.wallets import WalletInfo
 from src.repositories.wallets import WalletsRepository
 
 
@@ -31,8 +32,8 @@ class WalletsServices:
 
             return account_data
 
-    async def get_last_accounts_info(self, limit: int, offset: int):
+    async def get_last_accounts_info(self, limit: int, offset: int) -> list[WalletInfo]:
         return await self.repository.get_wallets_info(limit, offset)
 
-    async def save_account_info(self, **data) -> None:
-        await self.repository.create_wallet_info(**data)
+    async def save_account_info(self, **data) -> str | None:
+        return await self.repository.create_wallet_info(**data)
