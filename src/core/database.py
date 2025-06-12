@@ -5,8 +5,13 @@ from sqlalchemy.orm import DeclarativeBase, declared_attr, mapped_column
 
 from src.core.settings import base_config
 
+DB_URL = base_config.DB_URL
+
+if base_config.MODE == "TEST":
+    DB_URL = base_config.TEST_DB_URL
+
 engine = create_async_engine(
-    url=base_config.DB_URL,
+    url=DB_URL,
     echo=False,
 )
 
