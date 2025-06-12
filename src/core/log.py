@@ -1,4 +1,4 @@
-import logging
+from logging import config
 
 LOGGING_CONFIG = {
     "version": 1,
@@ -27,4 +27,4 @@ LOGGING_CONFIG = {
 
 
 def logging_init_config(logging_config: dict) -> None:
-    logging.config.dictConfig(logging_config)
+    config.dictConfig(logging_config)
